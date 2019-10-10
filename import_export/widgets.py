@@ -179,7 +179,7 @@ class DateTimeWidget(Widget):
         for format in self.formats:
             try:
                 dt = datetime.strptime(value, format)
-                if settings.USE_TZ:
+                if settings.USE_TZ and timezone.is_naive(dt):
                     # make datetime timezone aware so we don't compare
                     # naive datetime to an aware one
                     dt = timezone.make_aware(dt,
